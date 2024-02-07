@@ -1,9 +1,7 @@
 .App {
-
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* align-items: center; */
 }
 
 input{
@@ -34,10 +32,7 @@ button {
   height: 3rem;
   width: 100%;
 }
-ul {
-  /* display: flex; */
-  /* align-items: center; */
-}
+
 li {
   font-size: 1.5rem;
   color: rgb(186, 252, 192);
