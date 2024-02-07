@@ -4,7 +4,6 @@
   justify-content: center;
   flex-wrap: wrap;
   /* align-items: center; */
-  background-color: rgb(0, 6, 83);
 }
 
 input{
@@ -22,6 +21,11 @@ form {
   align-items: center;
 }
 
+.loading {
+  font-size: 2rem;
+  color: rgb(186, 252, 192);
+  text-align: center;
+}
 
 button {
   color: rgb(186, 252, 192);
@@ -32,6 +36,7 @@ button {
 }
 ul {
   /* display: flex; */
+  /* align-items: center; */
 }
 li {
   font-size: 1.5rem;

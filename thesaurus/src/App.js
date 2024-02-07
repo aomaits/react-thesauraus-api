@@ -1,28 +1,23 @@
 import { useState } from 'react';
 import './App.css';
-import axios from 'axios'; // Import Axios
+import { fetchSynonyms } from './api/fetchSynonyms';
+import { useGetSynonyms } from './hooks/useGetSynonyms'
 
 function App() {
   const [word, setWord] = useState('');
-  const [synonyms, setSynonyms] = useState([]); // Initialize as empty array
+  const { isLoading, synonyms, getSynonyms } = useGetSynonyms();
 
   const handleFetchSynonyms = async (e) => {
     e.preventDefault();
+    getSynonyms(word);
+  };
 
-    try {
-      const response = await axios.get(`https://api.datamuse.com/words?rel_syn=${word}`, {
-        params: {
-          rel_syn: word // Passing in word as the query parameter
-        }
-      });
 
-      setSynonyms(response.data); // Setting synonyms w/ API response data
-    } catch (error) {
-      console.error('Error fetching synonyms: ', error);
+  const handleSynonymClicked = async (newWord) => {
+    if (newWord !== word) {
+      setWord(newWord);
+      getSynonyms(newWord);
     }
-    // fetch()
-    // .then((response) => response.json())
-    // .then(setSynonyms);
   }
 
   return (
@@ -38,11 +33,15 @@ function App() {
           <button>Submit</button>
         </form>
 
-        <ul>
-          {synonyms.length > 0 && synonyms.map((synonym) => {
-            return <li key={synonym.word}>{synonym.word}</li>
-          })}
-        </ul>
+        {isLoading ? (
+          <div class="loading">Loading...</div>
+        ) : (
+          <ul>
+            {synonyms.length > 0 && synonyms.map((synonym) => {
+              return <li onClick={() => handleSynonymClicked(synonym.word)} key={synonym.word}>{synonym.word}</li>
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );
